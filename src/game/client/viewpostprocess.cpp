@@ -1478,6 +1478,7 @@ bool g_bDumpRenderTargets = false;
 // Dump a rendertarget to a TGA.  Useful for looking at intermediate render target results.
 void DumpTGAofRenderTarget( const int width, const int height, const char *pFilename )
 {
+#if 0
 	// Ensure that mat_queue_mode is zero
 	static ConVarRef mat_queue_mode( "mat_queue_mode" );
 	if ( mat_queue_mode.GetInt() != 0 )
@@ -1516,6 +1517,7 @@ void DumpTGAofRenderTarget( const int width, const int height, const char *pFile
 	filesystem->Close( fileTGA );
 
 	free( pTGA );
+#endif
 }
 
 

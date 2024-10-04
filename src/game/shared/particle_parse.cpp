@@ -240,6 +240,7 @@ void ParseParticleEffectsMap( const char *pMapName, bool bLoadSheets, IFileList 
 //-----------------------------------------------------------------------------
 void PrecacheStandardParticleSystems( )
 {
+#if 0
 #ifdef GAME_DLL
 	// Now add each particle system name to the network string pool, so we can send string_t's 
 	// down to the client instead of full particle system names.
@@ -252,6 +253,7 @@ void PrecacheStandardParticleSystems( )
 			PrecacheParticleSystem( pParticleSystemName );
 		}
 	}
+#endif
 #endif
 }
 

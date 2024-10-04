@@ -21,7 +21,10 @@ $Group "game"
 	"raytrace"
 	"server"
 	"tier1"
+	"tier2"
+	"tier3"
 	"vgui_controls"
+	"particles"
 }
 
 $Group "shaders"

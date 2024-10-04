@@ -167,8 +167,8 @@ bool VGui_Startup( CreateInterfaceFn appSystemFactory )
 	if ( !vgui::VGui_InitInterfacesList( "CLIENT", &appSystemFactory, 1 ) )
 		return false;
 
-	if ( !vgui::VGui_InitMatSysInterfacesList( "CLIENT", &appSystemFactory, 1 ) )
-		return false;
+	//if ( !vgui::VGui_InitMatSysInterfacesList( "CLIENT", &appSystemFactory, 1 ) )
+	//	return false;
 
 	g_InputInternal = (IInputInternal *)appSystemFactory( VGUI_INPUTINTERNAL_INTERFACE_VERSION,  NULL );
 	if ( !g_InputInternal )

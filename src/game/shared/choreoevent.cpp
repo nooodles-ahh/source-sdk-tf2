@@ -4264,13 +4264,13 @@ bool CChoreoEvent::RestoreFromBuffer( CUtlBuffer& buf, CChoreoScene *pScene, ICh
 	if ( !m_Ramp.RestoreFromBuffer( buf, pStringPool ) )
 		return false;
 
-	int flags = buf.GetUnsignedChar();
-	SetResumeCondition( ( flags & ( 1<<0 ) ) ? true : false );
-	SetLockBodyFacing( ( flags & ( 1<<1 ) ) ? true : false );
-	SetFixedLength( ( flags & ( 1<<2 ) ) ? true : false );
-	SetActive( ( flags & ( 1<<3 ) ) ? true : false );
-	SetForceShortMovement( ( flags & ( 1<<4 ) ) ? true : false );
-	SetPlayOverScript( ( flags & ( 1<<5 ) ) ? true : false );
+	int cflags = buf.GetUnsignedChar();
+	SetResumeCondition( ( cflags & ( 1<<0 ) ) ? true : false );
+	SetLockBodyFacing( ( cflags & ( 1<<1 ) ) ? true : false );
+	SetFixedLength( ( cflags & ( 1<<2 ) ) ? true : false );
+	SetActive( ( cflags & ( 1<<3 ) ) ? true : false );
+	SetForceShortMovement( ( cflags & ( 1<<4 ) ) ? true : false );
+	SetPlayOverScript( ( cflags & ( 1<<5 ) ) ? true : false );
 
 	SetDistanceToTarget( buf.GetFloat() );
 
@@ -4483,8 +4483,8 @@ bool CChoreoEvent::RestoreFlexAnimationsFromBuffer( CUtlBuffer& buf, IChoreoStri
 
 		if ( track->IsComboType() )
 		{
-			int s = buf.GetUnsignedShort();
-			for ( int j = 0; j < s; ++j )
+			int sc = buf.GetUnsignedShort();
+			for ( int j = 0; j < sc; ++j )
 			{
 				float t, v;
 				t = buf.GetFloat();

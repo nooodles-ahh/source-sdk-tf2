@@ -98,6 +98,7 @@ static bool CaptionCreateCallback( const char *pSourceName, const char *pTargetN
 //-----------------------------------------------------------------------------
 int UpdateOrCreateCaptionFile( const char *pSourceName, char *pTargetName, int maxLen, bool bForce )
 {
-	return ::UpdateOrCreate( pSourceName, pTargetName, maxLen, "GAME", CaptionCreateCallback, bForce );
+	return 0;
+	//return ::UpdateOrCreate( pSourceName, pTargetName, maxLen, "GAME", CaptionCreateCallback, bForce );
 }
 #endif

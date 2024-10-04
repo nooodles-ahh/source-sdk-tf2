@@ -2121,7 +2121,7 @@ PMaterialHandle CParticleMgr::GetPMaterial( const char *pMaterialName )
 //This function takes a leaked handle from a previous level and reacquires necessary materials.
 void CParticleMgr::RepairPMaterial( PMaterialHandle hMaterial )
 {
-	if( hMaterial->m_pMaterial != NULL )
+	if( !hMaterial || hMaterial->m_pMaterial != NULL )
 		return;
 
 	const char *pMaterialName = NULL;

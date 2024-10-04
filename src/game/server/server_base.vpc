@@ -703,6 +703,20 @@ $Project
 				}
 			}
 		}
+		
+		$File	"$SRCDIR\game\shared\choreoactor.cpp" \
+				"$SRCDIR\game\shared\choreochannel.cpp" \
+				"$SRCDIR\game\shared\choreoevent.cpp" \
+				"$SRCDIR\game\shared\choreoscene.cpp"
+		{
+			$Configuration
+			{
+				$Compiler
+				{
+					$Create/UsePrecompiledHeader	"Not Using Precompiled Headers"
+				}
+			}
+		}
 
 		$Folder	"Precompiled Header"
 		{
@@ -1007,8 +1021,8 @@ $Project
 	
 	$Folder	"Link Libraries" 
 	{
-		$Lib	choreoobjects
-		$Lib	dmxloader
+		//$Lib	choreoobjects
+		//$Lib	dmxloader
 		$Lib	mathlib
 		$Lib	particles
 		$Lib	tier2

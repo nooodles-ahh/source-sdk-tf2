@@ -1,0 +1,31 @@
+//-----------------------------------------------------------------------------
+//	GAMEUI_STUB.VPC
+//
+//	Project Script
+//-----------------------------------------------------------------------------
+$Macro SRCDIR		".."
+$Include "$SRCDIR\vpc_scripts\source_lib_base.vpc"
+
+
+$Configuration
+{
+
+	$Compiler
+	{
+		$AdditionalIncludeDirectories	"$BASE;.\;$SRCDIR\public\particles;$SRCDIR\public"
+		$PreprocessorDefinitions		"$BASE;"
+	}
+
+}
+
+$Project "Particles"
+{
+	
+	$File	"particles.cpp" \
+			"particlecollection.cpp"
+
+
+	$Folder	"Link Libraries"
+	{
+ 	}
+}

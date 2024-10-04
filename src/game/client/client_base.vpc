@@ -293,7 +293,7 @@ $Project
 		$File	"c_world.cpp"
 		$File	"$SRCDIR\game\shared\cam_thirdperson.cpp"
 		$File	"$SRCDIR\game\shared\cam_thirdperson.h"
-		$File	"camomaterialproxy.cpp"
+		//$File	"camomaterialproxy.cpp"
 		$File	"cdll_client_int.cpp"
 		$File	"cdll_bounded_cvars.cpp"
 		$File	"cdll_bounded_cvars.h"
@@ -649,8 +649,8 @@ $Project
 			$File	"game_controls\baseviewport.cpp"
 			$File	"game_controls\basemodelpanel.cpp"
 			$File	"game_controls\basemodelpanel.h"
-			$File	"game_controls\basemodel_panel.cpp"
-			$File	"game_controls\basemodel_panel.h"
+			//$File	"game_controls\basemodel_panel.cpp"
+			//$File	"game_controls\basemodel_panel.h"
 			$File	"game_controls\ClientScoreBoardDialog.cpp"
 			$File	"game_controls\commandmenu.cpp"
 			$File	"game_controls\intromenu.cpp"
@@ -880,6 +880,20 @@ $Project
 		$File	"weapons_resource.h"
 		$File	"vgui_video.h"
 		$File   "vgui_video_player.h"
+		
+		$File	"$SRCDIR\game\shared\choreoactor.cpp" \
+				"$SRCDIR\game\shared\choreochannel.cpp" \
+				"$SRCDIR\game\shared\choreoevent.cpp" \
+				"$SRCDIR\game\shared\choreoscene.cpp"
+		{
+			$Configuration
+			{
+				$Compiler
+				{
+					$Create/UsePrecompiledHeader	"Not Using Precompiled Headers"
+				}
+			}
+		}
 	}
 
 	$Folder	"Public Header Files"
@@ -1245,31 +1259,31 @@ $Project
 	
 	$Folder	"Link Libraries"
 	{
-		$Lib		bitmap
-		$Lib		choreoobjects
-		$Lib		dmxloader
+		//$Lib		bitmap
+		//$Lib		choreoobjects
+		//$Lib		dmxloader
 		$Lib		mathlib
-		$Lib		matsys_controls
-		$Lib		particles
+		//$Lib		matsys_controls
+		$Lib		particles // stubbed
 		$Lib		tier1
 		$Lib		tier2
 		$Lib		tier3
 		$Lib		vgui_controls
-		$Lib		vtf
+		//$Lib		vtf
 		$ImpLib		steam_api
 		
-		$Libexternal $LIBCOMMON/libcrypto [$OSXALL]
-		$Libexternal "$SRCDIR\lib\common\$(CRYPTOPPDIR)\libcrypto" [$LINUXALL]
+		//$Libexternal $LIBCOMMON/libcrypto [$OSXALL]
+		//$Libexternal "$SRCDIR\lib\common\$(CRYPTOPPDIR)\libcrypto" [$LINUXALL]
 
-		$ImpLib	"$LIBCOMMON\curl"	  [$OSXALL]
+		//$ImpLib	"$LIBCOMMON\curl"	  [$OSXALL]
 
-		$Lib	"$LIBCOMMON\libcurl" [$WIN32]
-		$Lib   "libz" [$WIN32]
+		//$Lib	"$LIBCOMMON\libcurl" [$WIN32]
+		//$Lib   "libz" [$WIN32]
 
-		$Libexternal	libz [$LINUXALL]
-		$Libexternal "$LIBCOMMON/libcurl" [$LINUXALL]
-		$Libexternal "$LIBCOMMON/libcurlssl" [$LINUXALL]
-		$Libexternal "$SRCDIR\lib\common\$(CRYPTOPPDIR)\libssl" [$LINUXALL]
+		//$Libexternal	libz [$LINUXALL]
+		//$Libexternal "$LIBCOMMON/libcurl" [$LINUXALL]
+		//$Libexternal "$LIBCOMMON/libcurlssl" [$LINUXALL]
+		//$Libexternal "$SRCDIR\lib\common\$(CRYPTOPPDIR)\libssl" [$LINUXALL]
  	}
 
 }
