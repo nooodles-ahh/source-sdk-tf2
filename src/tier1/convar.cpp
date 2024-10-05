@@ -659,12 +659,18 @@ ConVar::ConVar( const char *pName, const char *pDefaultValue, int flags, const c
 
 ConVar::ConVar( const char *pName, const char *pDefaultValue, int flags, const char *pHelpString, FnChangeCallback_t callback )
 {
-	Create( pName, pDefaultValue, flags, pHelpString, false, 0.0, false, 0.0, callback );
+	Create(pName, pDefaultValue, flags, pHelpString, false, 0.0, false, 0.0, false, 0.0, false, 0.0, callback);
 }
 
 ConVar::ConVar( const char *pName, const char *pDefaultValue, int flags, const char *pHelpString, bool bMin, float fMin, bool bMax, float fMax, FnChangeCallback_t callback )
 {
-	Create( pName, pDefaultValue, flags, pHelpString, bMin, fMin, bMax, fMax, callback );
+	Create(pName, pDefaultValue, flags, pHelpString, bMin, fMin, bMax, fMax, false, 0.0, false, 0.0, callback);
+}
+
+ConVar::ConVar(const char* pName, const char* pDefaultValue, int flags, const char* pHelpString, bool bMin, float fMin, bool bMax, float fMax,
+	bool bCompMin, float fCompMin, bool bCompMax, float fCompMax, FnChangeCallback_t callback)
+{
+	Create(pName, pDefaultValue, flags, pHelpString, bMin, fMin, bMax, fMax, bCompMin, fCompMin, bCompMax, fCompMax, callback);
 }
 
 
@@ -862,7 +868,7 @@ bool ConVar::ClampValue( float& value )
 // Purpose: 
 // Input  : *value - 
 //-----------------------------------------------------------------------------
-void ConVar::InternalSetFloatValue( float fNewValue )
+void ConVar::InternalSetFloatValue( float fNewValue, bool bForce /*= false */)
 {
 	if ( fNewValue == m_fValue )
 		return;
@@ -946,7 +952,9 @@ void ConVar::InternalSetIntValue( int nValue )
 //-----------------------------------------------------------------------------
 void ConVar::Create( const char *pName, const char *pDefaultValue, int flags /*= 0*/,
 	const char *pHelpString /*= NULL*/, bool bMin /*= false*/, float fMin /*= 0.0*/,
-	bool bMax /*= false*/, float fMax /*= false*/, FnChangeCallback_t callback /*= NULL*/ )
+	bool bMax /*= false*/, float fMax /*= false*/, 
+	bool bCompMin /*= false*/, float fCompMin /*= 0.0*/, bool bCompMax /*= false*/, float fCompMax /*= false*/,
+	FnChangeCallback_t callback /*= NULL*/ )
 {
 	m_pParent = this;
 
@@ -961,6 +969,14 @@ void ConVar::Create( const char *pName, const char *pDefaultValue, int flags /*=
 	m_fMinVal = fMin;
 	m_bHasMax = bMax;
 	m_fMaxVal = fMax;
+
+	/* comp stuff */
+	/*m_bHasCompMin = bCompMin;
+	m_fMinCompVal = fCompMin;
+	m_bHasCompMax = bCompMax;
+	m_fMaxCompVal = fCompMax;
+	
+	m_bUnkValue = false;*/
 	
 	m_fnChangeCallback = callback;
 

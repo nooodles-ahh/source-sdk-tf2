@@ -51,7 +51,7 @@ public:
 	virtual bool			IsGameUIVisible() = 0;
 };
 
-#define VENGINE_VGUI_VERSION	"VEngineVGui001"
+#define VENGINE_VGUI_VERSION	"VEngineVGui002"
 
 #if defined(_STATIC_LINKED) && defined(CLIENT_DLL)
 namespace Client
