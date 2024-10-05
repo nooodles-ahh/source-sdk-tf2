@@ -12,6 +12,8 @@
 
 #include "ipresence.h"
 #include "igamesystem.h"
+#include "tier1/utlvector.h"
+#include "xbox/xboxstubs.h"
 
 //-----------------------------------------------------------------------------
 // Purpose: Common implementation for setting user contexts and properties.

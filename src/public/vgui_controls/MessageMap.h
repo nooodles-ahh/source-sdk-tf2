@@ -46,7 +46,11 @@ class __virtual_inheritance Panel;
 #else
 class Panel;
 #endif
+#ifdef PLATFORM_64BITS
+typedef unsigned long long VPANEL;
+#else
 typedef unsigned int VPANEL;
+#endif
 
 typedef void (Panel::*MessageFunc_t)(void);
 

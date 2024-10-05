@@ -16,7 +16,7 @@ $MacroRequired "GAMENAME"
 $Include "$SRCDIR\vpc_scripts\source_dll_base.vpc"
 $include "$SRCDIR\vpc_scripts\protobuf_builder.vpc"
 $Include "$SRCDIR\vpc_scripts\source_replay.vpc"	[$TF]
-$Include "$SRCDIR\game\protobuf_include.vpc"
+//$Include "$SRCDIR\game\protobuf_include.vpc"
 
 $Configuration	"Debug"
 {
@@ -432,7 +432,7 @@ $Project
 		$File	"ragdoll.cpp"
 		$File	"$SRCDIR\game\shared\ragdoll_shared.cpp"
 		$File	"recvproxy.cpp"
-		$File	"basepresence.cpp"			[$WIN32||$POSIX]
+		$File	"basepresence.cpp"			[$WINDOWS||$POSIX]
 		$File	"basepresence_xbox.cpp"		[$X360]
 		$File	"$SRCDIR\game\shared\rope_helpers.cpp"
 		$File	"$SRCDIR\game\shared\saverestore.cpp"
@@ -508,7 +508,7 @@ $Project
 		$File	"$SRCDIR\game\client\c_vote_controller.cpp"
 		//Haptics
 		$File	"$SRCDIR\public\haptics\haptic_msgs.cpp"	[!$X360]
-		$File	"$SRCDIR\public\haptics\haptic_utils.cpp"	[$WIN32&&!$X360]
+		$File	"$SRCDIR\public\haptics\haptic_utils.cpp"	[$WIN32&&!$X360&&!$WIN64]
 
 		$Folder	"Sixense"
 		{
@@ -1119,8 +1119,8 @@ $Project
 		$File	"$SRCDIR\public\worldsize.h"
 		$File	"$SRCDIR\public\zip_uncompressed.h"
 		//Haptics
-		$File   "$SRCDIR\public\haptics\ihaptics.h"	[$WIN32]
-		$File   "$SRCDIR\public\haptics\haptic_utils.h"	[$WIN32]
+		$File   "$SRCDIR\public\haptics\ihaptics.h"	[$WIN32&&!$WIN64]
+		$File   "$SRCDIR\public\haptics\haptic_utils.h"	[$WIN32&&!$WIN64]
 	}
 
 	$Folder	"Game Shared Header Files"

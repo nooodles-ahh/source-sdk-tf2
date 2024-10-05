@@ -1094,6 +1094,8 @@ public:
 
 #ifdef GNUC
 #define ENTITYFUNCPTR_SIZE	8
+#elif PLATFORM_64BITS
+#define ENTITYFUNCPTR_SIZE	8
 #else
 #define ENTITYFUNCPTR_SIZE	4
 #endif

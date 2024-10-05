@@ -1197,7 +1197,7 @@ bool CBaseCombatWeapon::SendWeaponAnim( int iActivity )
 	iActivity = TranslateViewmodelHandActivity( (Activity)iActivity );
 #endif		
 	// NVNT notify the haptics system of this weapons new activity
-#ifdef WIN32
+#if defined(WIN32) && !defined(PLATFORM_64BITS)
 #ifdef CLIENT_DLL
 	if ( prediction->InPrediction() && prediction->IsFirstTimePredicted() )
 #endif

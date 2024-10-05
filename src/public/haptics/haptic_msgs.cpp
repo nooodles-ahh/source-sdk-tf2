@@ -119,7 +119,7 @@ void HookHapticMessages(void)
 }
 
 // Defined in haptics_utils
-#ifdef WIN32
+#if defined(WIN32) && !defined(PLATFORM_64BITS)
 void HapticsHandleMsg_HapSetDrag( float drag );
 void HapticsHandleMsg_HapSetConst( Vector const &constant );
 void HapticsHandleMsg_SPHapWeapEvent( int iActivity );
@@ -130,7 +130,7 @@ void HapticsHandleMsg_HapMeleeContact();
 
 void __MsgFunc_HapSetDrag( bf_read &msg )
 {
-#ifdef WIN32
+#if defined(WIN32) && !defined(PLATFORM_64BITS)
 	float drag = msg.ReadFloat();
 	HapticsHandleMsg_HapSetDrag( drag );
 #endif // WIN32
@@ -139,7 +139,7 @@ void __MsgFunc_HapSetDrag( bf_read &msg )
 //Might be able to handle this better...
 void __MsgFunc_HapSetConst( bf_read &msg )
 {
-#ifdef WIN32
+#if defined(WIN32) && !defined(PLATFORM_64BITS)
 	Vector constant;
 	constant.x = msg.ReadShort();
 	constant.y = msg.ReadShort();
@@ -151,7 +151,7 @@ void __MsgFunc_HapSetConst( bf_read &msg )
 
 void __MsgFunc_SPHapWeapEvent( bf_read &msg )
 {
-#ifdef WIN32
+#if defined(WIN32) && !defined(PLATFORM_64BITS)
 	int iActivity = msg.ReadLong();
 
 	HapticsHandleMsg_SPHapWeapEvent( iActivity );
@@ -160,7 +160,7 @@ void __MsgFunc_SPHapWeapEvent( bf_read &msg )
 
 void __MsgFunc_HapPunch( bf_read &msg )
 {
-#ifdef WIN32
+#if defined(WIN32) && !defined(PLATFORM_64BITS)
 	float x = msg.ReadFloat();
 	float y = msg.ReadFloat();
 	float z = msg.ReadFloat();
@@ -171,7 +171,7 @@ void __MsgFunc_HapPunch( bf_read &msg )
 
 void __MsgFunc_HapDmg( bf_read &msg )
 {
-#ifdef WIN32
+#if defined(WIN32) && !defined(PLATFORM_64BITS)
 	float pitch = msg.ReadFloat();
 	float yaw = msg.ReadFloat();
 	float damage = msg.ReadFloat();
@@ -183,7 +183,7 @@ void __MsgFunc_HapDmg( bf_read &msg )
 
 void __MsgFunc_HapMeleeContact( bf_read &msg )
 {
-#ifdef WIN32
+#if defined(WIN32) && !defined(PLATFORM_64BITS)
 	HapticsHandleMsg_HapMeleeContact();
 #endif // WIN32
 }

@@ -16,7 +16,7 @@ $Project "captioncompiler"
 
 $Project "client"
 {
-	"game\client\client_hl2mp.vpc"		[($WIN32||$POSIX) && $HL2MP]
+	"game\client\client_hl2mp.vpc"		[($WINDOWS||$POSIX) && $HL2MP]
 }
 
 $Project "fgdlib"
@@ -41,7 +41,7 @@ $Project "height2normal"
 
 $Project "server"
 {
-	"game\server\server_hl2mp.vpc"		[($WIN32||$POSIX) && $HL2MP]
+	"game\server\server_hl2mp.vpc"		[($WINDOWS||$POSIX) && $HL2MP]
 }
 
 $Project "mathlib"
@@ -61,7 +61,7 @@ $Project "phonemeextractor"
 
 $Project "raytrace"
 {
-	"raytrace\raytrace.vpc" [$WIN32||$X360||$POSIX]
+	"raytrace\raytrace.vpc" [$WINDOWS||$X360||$POSIX]
 }
 
 $Project "qc_eyes"
@@ -91,7 +91,7 @@ $Project "vbsp"
 
 $Project "vgui_controls"
 {
-	"vgui2\vgui_controls\vgui_controls.vpc" [$WIN32||$X360||$POSIX]
+	"vgui2\vgui_controls\vgui_controls.vpc" [$WINDOWS||$X360||$POSIX]
 }
 
 $Project "vice"

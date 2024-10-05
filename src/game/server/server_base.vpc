@@ -16,7 +16,7 @@ $MacroRequired "GAMENAME"
 $include "$SRCDIR\vpc_scripts\source_dll_base.vpc"
 $include "$SRCDIR\vpc_scripts\protobuf_builder.vpc"
 $Include "$SRCDIR\vpc_scripts\source_replay.vpc"	[$TF]
-$Include "$SRCDIR\game\protobuf_include.vpc"
+//$Include "$SRCDIR\game\protobuf_include.vpc"
 
 $Configuration	"Debug"
 {
@@ -663,7 +663,7 @@ $Project
 		$File	"$SRCDIR\game\server\vote_controller.cpp"
 		//Haptics
 		$File	"$SRCDIR\public\haptics\haptic_msgs.cpp"
-		$File	"$SRCDIR\public\haptics\haptic_utils.cpp"	[$WIN32]
+		$File	"$SRCDIR\public\haptics\haptic_utils.cpp"	[$WIN32&&!$WIN64]
 
 		// Not using precompiled header cbase.h
 
@@ -1009,7 +1009,7 @@ $Project
 		$File	"$SRCDIR\game\shared\mp_shareddefs.h"
 		$File	"$SRCDIR\game\shared\econ\ihasowner.h"
 		//Haptics
-		$File	"$SRCDIR\public\haptics\haptic_utils.h"	[$WIN32]
+		$File	"$SRCDIR\public\haptics\haptic_utils.h"	[$WIN32&&!$WIN64]
 	}
 
 	$Folder	"Tools Framework"
