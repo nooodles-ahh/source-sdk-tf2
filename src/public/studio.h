@@ -1192,8 +1192,13 @@ struct mstudiotexture_t
 	int						flags;
 	int						used;
     int						unused1;
-	mutable IMaterial		*material;  // fixme: this needs to go away . .isn't used by the engine, but is used by studiomdl
-	mutable void			*clientmaterial;	// gary, replace with client material pointer if used
+#ifdef PLATFORM_64BITS
+	uint32_t					material;  // fixme: this needs to go away . .isn't used by the engine, but is used by studiomdl
+	uint32_t					clientmaterial;	// gary, replace with client material pointer if used
+#else
+	mutable IMaterial* material;  // fixme: this needs to go away . .isn't used by the engine, but is used by studiomdl
+	mutable void* clientmaterial;	// gary, replace with client material pointer if used
+#endif
 	
 	int						unused[10];
 };
@@ -1302,13 +1307,21 @@ struct mstudio_meshvertexdata_t
 	int					GetGlobalVertexIndex( int i ) const;
 
 	// indirection to this mesh's model's vertex data
-	const mstudio_modelvertexdata_t	*modelvertexdata;
+#ifdef PLATFORM_64BITS
+	uint32_t			oldmodelvertexdata; // i don't know why
+#else
+	const mstudio_modelvertexdata_t* modelvertexdata;
+#endif
 
 	// used for fixup calcs when culling top level lods
 	// expected number of mesh verts at desired lod
 	int					numLODVertexes[MAX_NUM_LODS];
+#ifdef PLATFORM_64BITS
+	const mstudio_modelvertexdata_t* modelvertexdata;
+#endif
 };
 
+#pragma pack( push, 4 )
 struct mstudiomesh_t
 {
 	DECLARE_BYTESWAP_DATADESC();
@@ -1339,7 +1352,12 @@ struct mstudiomesh_t
 
 	mstudio_meshvertexdata_t vertexdata;
 
+#ifdef PLATFORM_64BITS
+	int					unused[5]; // remove as appropriate
+#else
 	int					unused[8]; // remove as appropriate
+#endif
+
 
 	mstudiomesh_t(){}
 private:
@@ -1383,8 +1401,13 @@ struct mstudiomodel_t
 
 	mstudio_modelvertexdata_t vertexdata;
 
+#ifdef PLATFORM_64BITS
+	int					unused[6];		// remove as appropriate
+#else
 	int					unused[8];		// remove as appropriate
+#endif
 };
+#pragma pack( pop )
 
 inline bool mstudio_modelvertexdata_t::HasTangentData( void ) const 
 {
@@ -2259,7 +2282,11 @@ struct studiohdr_t
 	const studiohdr_t	*FindModel( void **cache, char const *modelname ) const;
 
 	// implementation specific back pointer to virtual data
+#ifdef PLATFORM_64BITS
+	uint32_t			virtualModel;
+#else
 	mutable void		*virtualModel;
+#endif
 	virtualmodel_t		*GetVirtualModel( void ) const;
 
 	// for demand loaded animation blocks
@@ -2268,7 +2295,11 @@ struct studiohdr_t
 	int					numanimblocks;
 	int					animblockindex;
 	inline mstudioanimblock_t *pAnimBlock( int i ) const { Assert( i > 0 && i < numanimblocks); return (mstudioanimblock_t *)(((byte *)this) + animblockindex) + i; };
+#ifdef PLATFORM_64BITS
+	uint32_t			animblockModel;
+#else
 	mutable void		*animblockModel;
+#endif
 	byte *				GetAnimBlock( int i ) const;
 
 	int					bonetablebynameindex;
@@ -2276,8 +2307,13 @@ struct studiohdr_t
 
 	// used by tools only that don't cache, but persist mdl's peer data
 	// engine uses virtualModel to back link to cache pointers
+#ifdef PLATFORM_64BITS
+	uint32_t			pVertexBase;
+	uint32_t			pIndexBase;
+#else
 	void				*pVertexBase;
 	void				*pIndexBase;
+#endif
 
 	// if STUDIOHDR_FLAGS_CONSTANT_DIRECTIONAL_LIGHT_DOT is set,
 	// this value is used to calculate directional components of lighting 
