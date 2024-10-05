@@ -58,7 +58,7 @@ public:
 	short	m_nSurfaceProp;
 
 	// Some TF2 specific things
-	intp	m_nMaterial;
+	int		m_nMaterial;
 	int		m_nDamageType;
 	int		m_nHitBox;
 	
