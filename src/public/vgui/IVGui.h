@@ -31,9 +31,6 @@ enum
 	DEFAULT_VGUI_CONTEXT = ((vgui::HContext)~0)
 };
 
-// safe handle to a panel - can be converted to and from a VPANEL
-typedef unsigned long HPanel;
-
 //-----------------------------------------------------------------------------
 // Purpose: Interface to core vgui components
 //-----------------------------------------------------------------------------

@@ -189,6 +189,7 @@ public:
 	unsigned int	GetUnsignedInt( );
 	float			GetFloat( );
 	double			GetDouble( );
+	uintp			GetPtr();
 	template <size_t maxLenInChars> void GetString( char( &pString )[maxLenInChars] )
 	{
 		GetStringInternal( pString, maxLenInChars );
@@ -274,6 +275,7 @@ public:
 	void			PutFloat( float f );
 	void			PutDouble( double d );
 	void			PutString( const char* pString );
+	void 			PutPtr( uintp p );
 	void			Put( const void* pMem, int size );
 
 	// Used for putting objects that have a byteswap datadesc defined
@@ -759,6 +761,17 @@ inline double CUtlBuffer::GetDouble( )
 	return d;
 }
 
+inline uintp CUtlBuffer::GetPtr()
+{
+	uintp u;
+#ifdef PLATFORM_64BITS
+	GetType(u, "%llu");
+#else
+	GetType(u, "%u");
+#endif
+	return u;
+}
+
 
 //-----------------------------------------------------------------------------
 // Where am I writing?
@@ -979,6 +992,15 @@ inline void CUtlBuffer::PutFloat( float f )
 inline void CUtlBuffer::PutDouble( double d )
 {
 	PutType( d, "%f" );
+}
+
+inline void CUtlBuffer::PutPtr(uintp p)
+{
+#ifdef PLATFORM_64BITS
+	PutType(p, "%llu");
+#else
+	PutType(p, "%u");
+#endif
 }
 
 

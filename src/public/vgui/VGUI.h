@@ -12,6 +12,8 @@
 #pragma once
 #endif
 
+#include <tier0/platform.h>
+
 #define null 0L
 
 #ifndef NULL
@@ -50,11 +52,7 @@ namespace vgui
 {
 // handle to an internal vgui panel
 // this is the only handle to a panel that is valid across dll boundaries
-#ifdef PLATFORM_64BITS
-typedef unsigned long long VPANEL;
-#else
-typedef unsigned int VPANEL;
-#endif
+typedef uintp VPANEL;
 
 // handles to vgui objects
 // NULL values signify an invalid value

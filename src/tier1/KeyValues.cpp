@@ -444,6 +444,20 @@ KeyValues::KeyValues( const char *setName, const char *firstKey, int firstValue,
 }
 
 //-----------------------------------------------------------------------------
+// Purpose: Constructor
+//-----------------------------------------------------------------------------
+KeyValues::KeyValues(const char* setName, const char* firstKey, uint64 firstValue, const char* secondKey, uint64 secondValue)
+{
+	TRACK_KV_ADD(this, setName);
+
+	Init();
+	SetName(setName);
+	SetUint64(firstKey, firstValue);
+	SetUint64(secondKey, secondValue);
+}
+
+
+//-----------------------------------------------------------------------------
 // Purpose: Initialize member variables
 //-----------------------------------------------------------------------------
 void KeyValues::Init()
@@ -1307,8 +1321,9 @@ int KeyValues::GetInt( const char *keyName, int defaultValue )
 			// can't convert, since it would lose data
 			Assert(0);
 			return 0;
-		case TYPE_INT:
 		case TYPE_PTR:
+			return (int)(size_t)dat->m_pValue;
+		case TYPE_INT:
 		default:
 			return dat->m_iValue;
 		};
@@ -1335,8 +1350,9 @@ uint64 KeyValues::GetUint64( const char *keyName, uint64 defaultValue )
 			return (int)dat->m_flValue;
 		case TYPE_UINT64:
 			return *((uint64 *)dat->m_sValue);
-		case TYPE_INT:
 		case TYPE_PTR:
+			return (uint64)(uintp)dat->m_pValue;
+		case TYPE_INT:
 		default:
 			return dat->m_iValue;
 		};
@@ -2652,7 +2668,7 @@ bool KeyValues::WriteAsBinary( CUtlBuffer &buffer )
 			}
 		case TYPE_PTR:
 			{
-				buffer.PutUnsignedInt( (int)dat->m_pValue );
+				buffer.PutPtr((uintp)dat->m_pValue);
 			}
 
 		default:
@@ -2756,7 +2772,7 @@ bool KeyValues::ReadAsBinary( CUtlBuffer &buffer, int nStackDepth )
 			}
 		case TYPE_PTR:
 			{
-				dat->m_pValue = (void*)buffer.GetUnsignedInt();
+				dat->m_pValue = (void*)buffer.GetPtr();
 			}
 
 		default:

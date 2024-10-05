@@ -995,7 +995,7 @@ inline T QWordSwapC( T dw )
 // The typically used methods.
 //-------------------------------------
 
-#if defined(__i386__) && !defined(VALVE_LITTLE_ENDIAN)
+#if defined(__i386__) || defined(_WIN64) && !defined(VALVE_LITTLE_ENDIAN)
 #define VALVE_LITTLE_ENDIAN 1
 #endif
 

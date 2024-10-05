@@ -444,6 +444,9 @@ public:
 		eFindMap_PossiblyAvailable
 	};
 	virtual eFindMapResult FindMap( /* in/out */ char *pMapName, int nMapNameMax ) = 0;
+
+	virtual void SetPausedForced(bool unk1, float unk2) = 0;
+	virtual IReplaySystem* GetReplay() = 0;
 };
 
 // These only differ in new items added to the end
