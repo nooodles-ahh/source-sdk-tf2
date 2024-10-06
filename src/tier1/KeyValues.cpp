@@ -443,6 +443,7 @@ KeyValues::KeyValues( const char *setName, const char *firstKey, int firstValue,
 	SetInt( secondKey, secondValue );
 }
 
+#ifdef PLATFORM_64BITS
 //-----------------------------------------------------------------------------
 // Purpose: Constructor
 //-----------------------------------------------------------------------------
@@ -455,7 +456,7 @@ KeyValues::KeyValues(const char* setName, const char* firstKey, uint64 firstValu
 	SetUint64(firstKey, firstValue);
 	SetUint64(secondKey, secondValue);
 }
-
+#endif
 
 //-----------------------------------------------------------------------------
 // Purpose: Initialize member variables

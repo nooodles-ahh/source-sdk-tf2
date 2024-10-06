@@ -2193,10 +2193,14 @@ int CDetailObjectSystem::BuildOutSortedSprites( CFastDetailLeafSpriteList *pData
 			vecPos0 += vecDy;
 			pQuadBufferOut->m_Coords[3] = vecPos0;
 
-			fltx4 fetch4 = *( ( fltx4 *) ( &pSprites->m_pSpriteDefs[0] ) );
-			*( (fltx4 *) ( & ( pQuadBufferOut->m_pSpriteDefs[0] ) ) ) = fetch4;
-
-			fetch4 = *( ( fltx4 *) ( &pSprites->m_RGBColor[0][0] ) );
+#ifdef PLATFORM_64BITS
+			__m256 fetch8 = *( ( __m256 *) ( &pSprites->m_pSpriteDefs[0] ) );
+			*( (__m256 *) ( & ( pQuadBufferOut->m_pSpriteDefs[0] ) ) ) = fetch8;
+#else
+			fltx4 spritedefs = *( ( fltx4* ) ( &pSprites->m_pSpriteDefs[0] ) );
+			*( ( fltx4* ) ( & ( pQuadBufferOut->m_pSpriteDefs[0] ) ) ) = spritedefs;
+#endif
+			fltx4 fetch4 = *( ( fltx4 *) ( &pSprites->m_RGBColor[0][0] ) );
 			*( (fltx4 *) ( & ( pQuadBufferOut->m_RGBColor[0][0] ) ) ) = fetch4;
 
 			//!! bug!! store distance
@@ -2322,33 +2326,33 @@ void CDetailObjectSystem::RenderFastSprites( const Vector &viewOrigin, const Vec
 					FastSpriteQuadBuildoutBufferNonSIMDView_t const *pquad = pQuadBuffer+nSIMDIdx;
 
 					// voodoo - since everything is in 4s, offset structure pointer by a couple of floats to handle sub-index
-					pquad = (FastSpriteQuadBuildoutBufferNonSIMDView_t const *) ( ( (intp) ( pquad ) )+ ( nSubIdx << 2 ) );
+					//pquad = (FastSpriteQuadBuildoutBufferNonSIMDView_t const *) ( ( (intp) ( pquad ) ) + ( nSubIdx << 2 ) );
 					uint8 const *pColorsCasted = reinterpret_cast<uint8 const *> ( pquad->m_Alpha );
 
 					uint8 color[4];
-					color[0] = pquad->m_RGBColor[0][0];
-					color[1] = pquad->m_RGBColor[0][1];
-					color[2] = pquad->m_RGBColor[0][2];
+					color[0] = pquad->m_RGBColor[nSubIdx][0];
+					color[1] = pquad->m_RGBColor[nSubIdx][1];
+					color[2] = pquad->m_RGBColor[nSubIdx][2];
 					color[3] = pColorsCasted[MANTISSA_LSB_OFFSET];
 
-					DetailPropSpriteDict_t *pDict = pquad->m_pSpriteDefs[0];
+					DetailPropSpriteDict_t *pDict = pquad->m_pSpriteDefs[nSubIdx];
 
-					meshBuilder.Position3f( pquad->m_flX0[0], pquad->m_flY0[0], pquad->m_flZ0[0] );
+					meshBuilder.Position3f( pquad->m_flX0[nSubIdx], pquad->m_flY0[nSubIdx], pquad->m_flZ0[nSubIdx] );
 					meshBuilder.Color4ubv( color );
 					meshBuilder.TexCoord2f( 0, pDict->m_TexLR.x, pDict->m_TexLR.y );
 					meshBuilder.AdvanceVertex();
 
-					meshBuilder.Position3f( pquad->m_flX1[0], pquad->m_flY1[0], pquad->m_flZ1[0] );
+					meshBuilder.Position3f( pquad->m_flX1[nSubIdx], pquad->m_flY1[nSubIdx], pquad->m_flZ1[nSubIdx] );
 					meshBuilder.Color4ubv( color );
 					meshBuilder.TexCoord2f( 0, pDict->m_TexLR.x, pDict->m_TexUL.y );
 					meshBuilder.AdvanceVertex();
 
-					meshBuilder.Position3f( pquad->m_flX2[0], pquad->m_flY2[0], pquad->m_flZ2[0] );
+					meshBuilder.Position3f( pquad->m_flX2[nSubIdx], pquad->m_flY2[nSubIdx], pquad->m_flZ2[nSubIdx] );
 					meshBuilder.Color4ubv( color );
 					meshBuilder.TexCoord2f( 0, pDict->m_TexUL.x, pDict->m_TexUL.y );
 					meshBuilder.AdvanceVertex();
 
-					meshBuilder.Position3f( pquad->m_flX3[0], pquad->m_flY3[0], pquad->m_flZ3[0] );
+					meshBuilder.Position3f( pquad->m_flX3[nSubIdx], pquad->m_flY3[nSubIdx], pquad->m_flZ3[nSubIdx] );
 					meshBuilder.Color4ubv( color );
 					meshBuilder.TexCoord2f( 0, pDict->m_TexUL.x, pDict->m_TexLR.y );
 					meshBuilder.AdvanceVertex();
@@ -2554,33 +2558,33 @@ void CDetailObjectSystem::RenderFastTranslucentDetailObjectsInLeaf( const Vector
 			FastSpriteQuadBuildoutBufferNonSIMDView_t const *pquad = pQuadBuffer+nSIMDIdx;
 
 			// voodoo - since everything is in 4s, offset structure pointer by a couple of floats to handle sub-index
-			pquad = (FastSpriteQuadBuildoutBufferNonSIMDView_t const *) ( ( (intp) ( pquad ) )+ ( nSubIdx << 2 ) );
+			//pquad = (FastSpriteQuadBuildoutBufferNonSIMDView_t const *) ( ( (intp) ( pquad ) )+ ( nSubIdx << 2 ) );
 			uint8 const *pColorsCasted = reinterpret_cast<uint8 const *> ( pquad->m_Alpha );
 
 			uint8 color[4];
-			color[0] = pquad->m_RGBColor[0][0];
-			color[1] = pquad->m_RGBColor[0][1];
-			color[2] = pquad->m_RGBColor[0][2];
+			color[0] = pquad->m_RGBColor[nSubIdx][0];
+			color[1] = pquad->m_RGBColor[nSubIdx][1];
+			color[2] = pquad->m_RGBColor[nSubIdx][2];
 			color[3] = pColorsCasted[MANTISSA_LSB_OFFSET];
 
-			DetailPropSpriteDict_t *pDict = pquad->m_pSpriteDefs[0];
+			DetailPropSpriteDict_t *pDict = pquad->m_pSpriteDefs[nSubIdx];
 
-			meshBuilder.Position3f( pquad->m_flX0[0], pquad->m_flY0[0], pquad->m_flZ0[0] );
+			meshBuilder.Position3f( pquad->m_flX0[nSubIdx], pquad->m_flY0[nSubIdx], pquad->m_flZ0[nSubIdx] );
 			meshBuilder.Color4ubv( color );
 			meshBuilder.TexCoord2f( 0, pDict->m_TexLR.x, pDict->m_TexLR.y );
 			meshBuilder.AdvanceVertex();
 
-			meshBuilder.Position3f( pquad->m_flX1[0], pquad->m_flY1[0], pquad->m_flZ1[0] );
+			meshBuilder.Position3f( pquad->m_flX1[nSubIdx], pquad->m_flY1[nSubIdx], pquad->m_flZ1[nSubIdx] );
 			meshBuilder.Color4ubv( color );
 			meshBuilder.TexCoord2f( 0, pDict->m_TexLR.x, pDict->m_TexUL.y );
 			meshBuilder.AdvanceVertex();
 
-			meshBuilder.Position3f( pquad->m_flX2[0], pquad->m_flY2[0], pquad->m_flZ2[0] );
+			meshBuilder.Position3f( pquad->m_flX2[nSubIdx], pquad->m_flY2[nSubIdx], pquad->m_flZ2[nSubIdx] );
 			meshBuilder.Color4ubv( color );
 			meshBuilder.TexCoord2f( 0, pDict->m_TexUL.x, pDict->m_TexUL.y );
 			meshBuilder.AdvanceVertex();
 
-			meshBuilder.Position3f( pquad->m_flX3[0], pquad->m_flY3[0], pquad->m_flZ3[0] );
+			meshBuilder.Position3f( pquad->m_flX3[nSubIdx], pquad->m_flY3[nSubIdx], pquad->m_flZ3[nSubIdx] );
 			meshBuilder.Color4ubv( color );
 			meshBuilder.TexCoord2f( 0, pDict->m_TexUL.x, pDict->m_TexLR.y );
 			meshBuilder.AdvanceVertex();

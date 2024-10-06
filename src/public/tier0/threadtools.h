@@ -223,6 +223,7 @@ inline int64 ThreadInterlockedCompareExchange64(int64 volatile* p, int64 value, 
 inline bool ThreadInterlockedAssignIf64(int64 volatile* p, int64 value, int64 comperand) { Assert((size_t)p % 8 == 0); return (_InterlockedCompareExchange64(p, value, comperand) == comperand); }
 #endif
 
+
 #else
 PLATFORM_INTERFACE long ThreadInterlockedIncrement( long volatile * );
 PLATFORM_INTERFACE long ThreadInterlockedDecrement( long volatile * );
@@ -260,6 +261,13 @@ typedef __int128_t int128;
 
 PLATFORM_INTERFACE bool ThreadInterlockedAssignIf128( volatile int128 *pDest, const int128 &value, const int128 &comperand ) NOINLINE;
 
+#else
+PLATFORM_INTERFACE int64 ThreadInterlockedIncrement64(int64 volatile*) NOINLINE;
+PLATFORM_INTERFACE int64 ThreadInterlockedDecrement64(int64 volatile*) NOINLINE;
+PLATFORM_INTERFACE int64 ThreadInterlockedCompareExchange64(int64 volatile*, int64 value, int64 comperand) NOINLINE;
+PLATFORM_INTERFACE int64 ThreadInterlockedExchange64(int64 volatile*, int64 value) NOINLINE;
+PLATFORM_INTERFACE int64 ThreadInterlockedExchangeAdd64(int64 volatile*, int64 value) NOINLINE;
+PLATFORM_INTERFACE bool ThreadInterlockedAssignIf64(volatile int64* pDest, int64 value, int64 comperand) NOINLINE;
 #endif
 
 inline unsigned ThreadInterlockedExchangeSubtract( unsigned volatile *p, unsigned value )	{ return ThreadInterlockedExchangeAdd( (long volatile *)p, value ); }
