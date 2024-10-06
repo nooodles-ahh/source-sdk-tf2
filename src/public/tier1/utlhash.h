@@ -22,7 +22,7 @@
 
 typedef unsigned int UtlHashHandle_t;
 
-template<class Data, typename C = bool (*)( Data const&, Data const& ), typename K = unsigned int (*)( Data const& ) >
+template<class Data, typename C = bool (*)( Data const&, Data const& ), typename K = uintp (*)( Data const& ) >
 class CUtlHash
 {
 public:

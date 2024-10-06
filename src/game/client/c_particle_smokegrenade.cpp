@@ -968,7 +968,7 @@ void C_ParticleSmokeGrenade::CleanupToolRecordingState( KeyValues *msg_ )
  		pLifetime->SetFloat( "maxLifetime", m_FadeEndTime );
 
 		KeyValues *pVelocity = pInitializers->FindKey( "DmeAttachmentVelocityInitializer", true );
-		pVelocity->SetPtr( "entindex", (void*)entindex() );
+		pVelocity->GetInt( "entindex", entindex() );
  		pVelocity->SetFloat( "minRandomSpeed", 10 );
  		pVelocity->SetFloat( "maxRandomSpeed", 20 );
 

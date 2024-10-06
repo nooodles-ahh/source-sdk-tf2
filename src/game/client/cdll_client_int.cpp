@@ -1156,6 +1156,11 @@ void CHLClient::PostInit()
 		}
 	}
 #endif
+
+	// TF2 engine broke this
+	ConVarRef cl_localnetworkbackdoor("cl_localnetworkbackdoor");
+	if(cl_localnetworkbackdoor.IsValid())
+		cl_localnetworkbackdoor.SetValue(0);
 }
 
 //-----------------------------------------------------------------------------

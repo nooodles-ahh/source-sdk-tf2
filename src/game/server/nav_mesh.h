@@ -199,7 +199,7 @@ public:
 	unsigned int operator()( const NavVisPair_t &item ) const
 	{
 		//COMPILE_TIME_ASSERT( sizeof(CNavArea *) == 4 );
-		unsigned int key[2] = { (uintp)item.pAreas[0] + item.pAreas[1]->GetID(), (uintp)item.pAreas[1] + item.pAreas[0]->GetID() };
+		unsigned int key[2] = { (int)(uintp)item.pAreas[0] + item.pAreas[1]->GetID(), (int)(uintp)item.pAreas[1] + item.pAreas[0]->GetID() };
 		return Hash8( key );	
 	}
 };

@@ -338,7 +338,7 @@ public:
 
 	int NumAllocated() const
 	{
-		return AllocSize() / sizeof( T );
+		return (int)(AllocSize() / sizeof(T));
 	}
 	int Count() const
 	{

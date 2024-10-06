@@ -179,6 +179,7 @@ abstract_class IDataCacheSection
 {
 public:
 	//--------------------------------------------------------
+	virtual ~IDataCacheSection() = 0;
 
 	virtual IDataCache *GetSharedCache() = 0;
 	virtual const char *GetName() = 0;
