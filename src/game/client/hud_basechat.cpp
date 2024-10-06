@@ -106,7 +106,7 @@ wchar_t* ConvertCRtoNL( wchar_t *str )
 
 void StripEndNewlineFromString( char *str )
 {
-	int s = strlen( str ) - 1;
+	size_t s = strlen( str ) - 1;
 	if ( s >= 0 )
 	{
 		if ( str[s] == '\n' || str[s] == '\r' )
@@ -116,7 +116,7 @@ void StripEndNewlineFromString( char *str )
 
 void StripEndNewlineFromString( wchar_t *str )
 {
-	int s = wcslen( str ) - 1;
+	size_t s = wcslen( str ) - 1;
 	if ( s >= 0 )
 	{
 		if ( str[s] == L'\n' || str[s] == L'\r' )

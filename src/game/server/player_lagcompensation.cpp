@@ -265,7 +265,7 @@ void CLagCompensationManager::FrameUpdatePostEntityThink()
 		Assert( track->Count() < 1000 ); // insanity check
 
 		// remove tail records that are too old
-		int tailIndex = track->Tail();
+		intp tailIndex = track->Tail();
 		while ( track->IsValidIndex( tailIndex ) )
 		{
 			LagRecord &tail = track->Element( tailIndex );

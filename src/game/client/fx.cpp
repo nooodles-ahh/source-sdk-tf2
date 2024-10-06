@@ -403,7 +403,7 @@ void FX_MuzzleEffectAttached(
 	KeyValues *pInitializers = pEmitter->FindKey( "initializers", true );
 
 	KeyValues *pPosition = pInitializers->FindKey( "DmeLinearAttachedPositionInitializer", true );
-	pPosition->SetPtr( "entindex", (void*)pEnt->entindex() );
+	pPosition->SetInt( "entindex", pEnt->entindex() );
 	pPosition->SetInt( "attachmentIndex", attachmentIndex );
 	pPosition->SetFloat( "linearOffsetX", 2.0f * scale );
 

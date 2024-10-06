@@ -35,7 +35,7 @@ class IDataCache;
 //---------------------------------------------------------
 // Unique (per section) identifier for a cache item defined by client
 //---------------------------------------------------------
-typedef uint32 DataCacheClientID_t;
+typedef uintp DataCacheClientID_t;
 
 
 //---------------------------------------------------------

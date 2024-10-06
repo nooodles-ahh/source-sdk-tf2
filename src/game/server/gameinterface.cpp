@@ -659,10 +659,10 @@ bool CServerGameDLL::DLLInit( CreateInterfaceFn appSystemFactory,
 	InitializeCvars();
 	
 	// Initialize the particle system
-	//if ( !g_pParticleSystemMgr->Init( g_pParticleSystemQuery ) )
-	//{
-	//	return false;
-	//}
+	if ( !g_pParticleSystemMgr->Init( g_pParticleSystemQuery ) )
+	{
+		return false;
+	}
 
 	sv_cheats = g_pCVar->FindVar( "sv_cheats" );
 	if ( !sv_cheats )

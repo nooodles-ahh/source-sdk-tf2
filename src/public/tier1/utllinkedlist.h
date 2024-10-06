@@ -24,7 +24,7 @@
 
 // This is a useful macro to iterate from head to tail in a linked list.
 #define FOR_EACH_LL( listName, iteratorName ) \
-	for( int iteratorName=(listName).Head(); (listName).IsUtlLinkedList && iteratorName != (listName).InvalidIndex(); iteratorName = (listName).Next( iteratorName ) )
+	for( intp iteratorName=(listName).Head(); (listName).IsUtlLinkedList && iteratorName != (listName).InvalidIndex(); iteratorName = (listName).Next( iteratorName ) )
 
 //-----------------------------------------------------------------------------
 // class CUtlLinkedList:
@@ -391,7 +391,7 @@ public:
 	CUtlFixedLinkedList( int growSize = 0, int initSize = 0 )
 		: CUtlLinkedList< T, intp, true, intp, CUtlFixedMemory< UtlLinkedListElem_t< T, intp > > >( growSize, initSize ) {}
 
-	bool IsValidIndex( int i ) const
+	bool IsValidIndex( intp i ) const
 	{
 		if ( !this->Memory().IsIdxValid( i ) )
 			return false;
