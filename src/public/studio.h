@@ -2079,7 +2079,9 @@ struct studiohdr2_t
 	int m_nBoneFlexDriverIndex;
 	inline mstudioboneflexdriver_t *pBoneFlexDriver( int i ) const { Assert( i >= 0 && i < m_nBoneFlexDriverCount ); return (mstudioboneflexdriver_t *)(((byte *)this) + m_nBoneFlexDriverIndex) + i; }
 
-	int reserved[56];
+	void* virtualmodel;
+
+	int reserved[54];
 };
 
 struct studiohdr_t
@@ -2283,7 +2285,7 @@ struct studiohdr_t
 
 	// implementation specific back pointer to virtual data
 #ifdef PLATFORM_64BITS
-	uint32_t			virtualModel;
+	uint32_t			_virtualModel;
 #else
 	mutable void		*virtualModel;
 #endif
@@ -2360,6 +2362,8 @@ struct studiohdr_t
 
 	inline int			BoneFlexDriverCount() const { return studiohdr2index ? pStudioHdr2()->m_nBoneFlexDriverCount : 0; }
 	inline const mstudioboneflexdriver_t* BoneFlexDriver( int i ) const { Assert( i >= 0 && i < BoneFlexDriverCount() ); return studiohdr2index ? pStudioHdr2()->pBoneFlexDriver( i ) : NULL; }
+
+	inline void* virtualModel() const { return studiohdr2index ? pStudioHdr2()->virtualmodel : NULL; }
 
 	// NOTE: No room to add stuff? Up the .mdl file format version 
 	// [and move all fields in studiohdr2_t into studiohdr_t and kill studiohdr2_t],
