@@ -144,7 +144,7 @@ bool CWeaponFrag::Holster( CBaseCombatWeapon *pSwitchingTo )
 //-----------------------------------------------------------------------------
 void CWeaponFrag::Operator_HandleAnimEvent( animevent_t *pEvent, CBaseCombatCharacter *pOperator )
 {
-	CBasePlayer *pOwner = ToBasePlayer( GetOwner() );
+	CBasePlayer *pPlayerOwner = ToBasePlayer( GetOwner() );
 	bool fThrewGrenade = false;
 
 	switch( pEvent->event )
@@ -154,20 +154,20 @@ void CWeaponFrag::Operator_HandleAnimEvent( animevent_t *pEvent, CBaseCombatChar
 			break;
 
 		case EVENT_WEAPON_THROW:
-			ThrowGrenade( pOwner );
-			DecrementAmmo( pOwner );
+			ThrowGrenade( pPlayerOwner );
+			DecrementAmmo( pPlayerOwner );
 			fThrewGrenade = true;
 			break;
 
 		case EVENT_WEAPON_THROW2:
-			RollGrenade( pOwner );
-			DecrementAmmo( pOwner );
+			RollGrenade( pPlayerOwner );
+			DecrementAmmo( pPlayerOwner );
 			fThrewGrenade = true;
 			break;
 
 		case EVENT_WEAPON_THROW3:
-			LobGrenade( pOwner );
-			DecrementAmmo( pOwner );
+			LobGrenade( pPlayerOwner );
+			DecrementAmmo( pPlayerOwner );
 			fThrewGrenade = true;
 			break;
 

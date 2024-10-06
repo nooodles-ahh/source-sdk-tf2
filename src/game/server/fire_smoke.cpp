@@ -1,4 +1,4 @@
-//========= Copyright Valve Corporation, All rights reserved. ============//
+//========= Copyright � 1996-2005, Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -106,8 +106,7 @@ BEGIN_DATADESC( CFireSmoke )
 	DEFINE_FIELD( m_flScale,			FIELD_FLOAT ),
 	DEFINE_FIELD( m_flScaleTime,		FIELD_FLOAT ),
 	DEFINE_FIELD( m_nFlags,				FIELD_INTEGER ),
-	DEFINE_FIELD( m_nFlameModelIndex,	FIELD_MODELINDEX ),
-	DEFINE_FIELD( m_nFlameFromAboveModelIndex,	FIELD_MODELINDEX ),
+	DEFINE_FIELD( m_nFlameFromAboveModelIndex,	FIELD_INTEGER ),
 
 END_DATADESC()
 
@@ -139,6 +138,11 @@ CFireSmoke::~CFireSmoke( void )
 void CFireSmoke::Precache()
 {
 	BaseClass::Precache();
+	m_nFlameModelIndex	= PrecacheModel( "sprites/fire1.vmt" );
+	
+	// This asset doesn't appear to exist anymore. What's going on? 
+	// Commenting this out so that level designers don't get a red error about missing material. (sjb)
+	//m_nFlameFromAboveModelIndex	= PrecacheModel( "sprites/flamefromabove.vmt" );
 }
 
 void CFireSmoke::Spawn()

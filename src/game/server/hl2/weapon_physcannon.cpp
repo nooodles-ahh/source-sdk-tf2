@@ -149,7 +149,7 @@ public:
 			// See if it's a grabbable physics prop
 			if ( FClassnameIs( pEntity, "prop_physics" ) )
 			{
-				CPhysicsProp *pPhysProp = dynamic_cast<CPhysicsProp *>(pEntity);
+				pPhysProp = dynamic_cast<CPhysicsProp *>(pEntity);
 				if ( pPhysProp != NULL )
 					return pPhysProp->CanBePickedUpByPhyscannon();
 

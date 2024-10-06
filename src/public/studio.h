@@ -2287,7 +2287,7 @@ struct studiohdr_t
 #ifdef PLATFORM_64BITS
 	uint32_t			_virtualModel;
 #else
-	mutable void		*virtualModel;
+	mutable void		*_virtualModel;
 #endif
 	virtualmodel_t		*GetVirtualModel( void ) const;
 
@@ -2363,8 +2363,11 @@ struct studiohdr_t
 	inline int			BoneFlexDriverCount() const { return studiohdr2index ? pStudioHdr2()->m_nBoneFlexDriverCount : 0; }
 	inline const mstudioboneflexdriver_t* BoneFlexDriver( int i ) const { Assert( i >= 0 && i < BoneFlexDriverCount() ); return studiohdr2index ? pStudioHdr2()->pBoneFlexDriver( i ) : NULL; }
 
+#ifdef PLATFORM_64BITS
 	inline void* virtualModel() const { return studiohdr2index ? pStudioHdr2()->virtualmodel : NULL; }
-
+#else
+	inline void* virtualModel() const { return _virtualModel; }
+#endif
 	// NOTE: No room to add stuff? Up the .mdl file format version 
 	// [and move all fields in studiohdr2_t into studiohdr_t and kill studiohdr2_t],
 	// or add your stuff to studiohdr2_t. See NumSrcBoneTransforms/SrcBoneTransform for the pattern to use.

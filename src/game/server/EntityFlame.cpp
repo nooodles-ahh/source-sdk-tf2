@@ -1,4 +1,4 @@
-//========= Copyright Valve Corporation, All rights reserved. ============//
+//========= Copyright � 1996-2005, Valve Corporation, All rights reserved. ============//
 //
 // Purpose: Flame entity to be attached to target entity. Serves two purposes:
 //
@@ -21,7 +21,7 @@
 BEGIN_DATADESC( CEntityFlame )
 
 	DEFINE_KEYFIELD( m_flLifetime, FIELD_FLOAT, "lifetime" ),
-
+	
 	DEFINE_FIELD( m_flSize, FIELD_FLOAT ),
 	DEFINE_FIELD( m_hEntAttached, FIELD_EHANDLE ),
 	DEFINE_FIELD( m_bUseHitboxes, FIELD_BOOLEAN ),
@@ -37,7 +37,10 @@ END_DATADESC()
 
 
 IMPLEMENT_SERVERCLASS_ST( CEntityFlame, DT_EntityFlame )
+	SendPropFloat( SENDINFO( m_flSize ), 16, SPROP_NOSCALE ),
 	SendPropEHandle( SENDINFO( m_hEntAttached ) ),
+	SendPropInt( SENDINFO( m_bUseHitboxes), 1, SPROP_UNSIGNED ),
+	SendPropTime( SENDINFO(m_flLifetime) )
 END_SEND_TABLE()
 
 LINK_ENTITY_TO_CLASS( entityflame, CEntityFlame );
@@ -322,6 +325,7 @@ void CEntityFlame::FlameThink( void )
 
 	FireSystem_AddHeatInRadius( GetAbsOrigin(), m_flSize/2, 2.0f );
 
+	SetNextThink( gpGlobals->curtime + FLAME_DAMAGE_INTERVAL );
 }  
 
 
