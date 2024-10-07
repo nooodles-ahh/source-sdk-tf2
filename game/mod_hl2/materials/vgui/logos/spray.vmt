@@ -1,8 +1,8 @@
-LightmappedGeneric
+"UnlitGeneric"
 {
-	"$basetexture"	"vgui\logos\spray_headshot"
+	"$basetexture"	"vgui\logos\emulsion_logo"
 	"$translucent" "1"
-	"$decal" "1"
-	"$decalscale" "0.250"
-
+	"$ignorez" "1"
+	"$vertexcolor" "1"
+	"$vertexalpha" "1"
 }

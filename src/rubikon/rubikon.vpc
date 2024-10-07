@@ -1,0 +1,81 @@
+//-----------------------------------------------------------------------------
+//	RUBIKON.VPC
+//
+//	Rubikon Project Script
+//-----------------------------------------------------------------------------
+
+$Macro SRCDIR		".."
+$Macro OUTBINNAME	"rubikon"
+$Macro OUTBINDIR	"$SRCDIR\..\game\bin\x64"
+
+$include "$SRCDIR\vpc_scripts\source_dll_base.vpc"
+
+$Configuration	"Debug"
+{
+	$General
+	{
+		$OutputDirectory		".\Debug_toolframework2"	[$WIN32]
+		$IntermediateDirectory	".\Debug_toolframework2"	[$WIN32]
+
+		$OutputDirectory		".\Debug_toolframework2"	[$X360]
+		$IntermediateDirectory	".\Debug_toolframework2"	[$X360]
+	}
+}
+
+$Configuration	"Release"
+{
+	$General
+	{
+		$OutputDirectory		".\Release_toolframework2"	[$WIN32]
+		$IntermediateDirectory	".\Release_toolframework2"	[$WIN32]
+
+		$OutputDirectory		".\Release_toolframework2"	[$X360]
+		$IntermediateDirectory	".\Release_toolframework2"	[$X360]
+	}
+}
+
+$Configuration
+{
+	
+	$Compiler
+	{
+		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\public\rubikon;.\;"
+		$PreprocessorDefinitions		"$BASE;TOOLS2_DLL;TOOLFRAMEWORK2_DLL;NO_STRING_T;VECTOR;VERSION_SAFE_STEAM_API_INTERFACES;PROTECTED_THINGS_ENABLE;RUBIKON_DLL;"
+		$PreprocessorDefinitions		"$BASE;SWDS" [$POSIX]
+		$PreprocessorDefinitions		"$BASE;fopen=dont_use_fopen" [$WINDOWS||$X360]
+	}
+
+	$Linker
+	{
+		$AdditionalDependencies			"$BASE winmm.lib" [$WIN32]
+	}
+}
+
+$Project "Rubikon"
+{
+	
+	$Folder	"Source Files"
+	{
+		$File "rubikon_int.cpp"
+	}
+
+	$Folder	"Header Files"
+	{
+		$File "rubikon_int.h"
+	}
+	
+	$Folder	"Public Header Files"
+	{
+		$File	"$SRCDIR\public\rubikon\irubikon_int.h"
+	}
+
+	$Folder	"Link Libraries" 
+	{
+		$Lib	dmxloader
+		$Lib	mathlib
+		$Lib	tier2
+		$Lib	tier3
+		$Lib	vgui_controls
+		$ImpLibexternal steam_api
+	}
+}

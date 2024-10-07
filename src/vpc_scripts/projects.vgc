@@ -146,3 +146,8 @@ $Project "tier3"
 {
 	"tier3\tier3.vpc"
 }
+
+$Project "rubikon"
+{
+	"rubikon\rubikon.vpc"
+}

@@ -1,9 +1,9 @@
 "GameInfo"
 {
-	game 		"My First HL2 Mod"
+	game 		"Rubikon Test"
 	title 		"HALF-LIFE'"
 	title2		""
-	supportsvr	1
+	supportsvr	0
 	ReplayRequired		0
 
 	type		singleplayer_only
@@ -61,7 +61,7 @@
 
 			// Add the HL2 directory as a game search path.  This is also where where writes
 			// to the "game" path go.
-			game+game_write		hl2
+			game+game_write		|all_source_engine_paths|hl2
 
 			// Where the game's binaries are
 			gamebin				hl2_mod/bin
