@@ -1254,6 +1254,7 @@ void variant_t::Set( fieldtype_t ftype, void *data )
 
 	case FIELD_EHANDLE:		eVal = *((EHANDLE *)data);			break;
 	case FIELD_CLASSPTR:	eVal = *((CBaseEntity **)data);		break;
+	case FIELD_PTR:			pVal = data;						break;
 	case FIELD_VOID:		
 	default:
 		iVal = 0; fieldType = FIELD_VOID;	
@@ -1289,6 +1290,7 @@ void variant_t::SetOther( void *data )
 
 	case FIELD_EHANDLE:		*((EHANDLE *)data) = eVal;			break;
 	case FIELD_CLASSPTR:	*((CBaseEntity **)data) = eVal;		break;
+	case FIELD_PTR:			*((void**)data) = pVal;				break;
 	}
 }
 

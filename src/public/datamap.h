@@ -65,6 +65,8 @@ typedef enum _fieldtypes
 	
 	FIELD_VECTOR2D,			// 2 floats
 
+	FIELD_PTR,				// a generic pointer
+
 	FIELD_TYPECOUNT,		// MUST BE LAST
 } fieldtype_t;
 
@@ -111,6 +113,7 @@ DECLARE_FIELD_SIZE( FIELD_TICK,			sizeof(int))
 DECLARE_FIELD_SIZE( FIELD_MODELNAME,	sizeof(intp))
 DECLARE_FIELD_SIZE( FIELD_SOUNDNAME,	sizeof(intp))
 DECLARE_FIELD_SIZE( FIELD_INPUT,		sizeof(int))
+DECLARE_FIELD_SIZE( FIELD_PTR,			sizeof(intp))
 #ifdef POSIX
 // pointer to members under gnuc are 8bytes if you have a virtual func
 DECLARE_FIELD_SIZE( FIELD_FUNCTION,		sizeof(uint64))

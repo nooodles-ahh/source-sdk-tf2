@@ -31,6 +31,7 @@ class variant_t
 		float flVal;
 		float vecVal[3];
 		color32 rgbaVal;
+		void* pVal;
 	};
 	CHandle<CBaseEntity> eVal; // this can't be in the union because it has a constructor.
 

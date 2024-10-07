@@ -91,6 +91,7 @@ static int gSizes[FIELD_TYPECOUNT] =
 	FIELD_SIZE( FIELD_MATERIALINDEX ),
 
 	FIELD_SIZE( FIELD_VECTOR2D ),
+	FIELD_SIZE( FIELD_PTR ),
 };
 
 
@@ -1313,6 +1314,10 @@ bool CSave::WriteGameField( const char *pname, void *pData, datamap_t *pRootMap,
 			WriteInterval( pField->fieldName, (interval_t *)pData, pField->fieldSize );
 			break;
 
+		case FIELD_PTR:
+			WriteData(pField->fieldName, pField->fieldSize * sizeof(void*), (const char*)pData);
+			break;
+
 		default:
 			Warning( "Bad field type\n" );
 			Assert(0);
@@ -2151,6 +2156,10 @@ void CRestore::ReadGameField( const SaveRestoreRecordHeader_t &header, void *pDe
 
 		case FIELD_INTERVAL:
 			ReadInterval( (interval_t *)pDest, pField->fieldSize, header.size );
+			break;
+
+		case FIELD_PTR:
+			ReadSimple<void*>((void**)pDest, pField->fieldSize, header.size);
 			break;
 
 		default:

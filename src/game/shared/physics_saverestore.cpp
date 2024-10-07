@@ -24,6 +24,7 @@
 #include "tier0/memdbgon.h"
 
 //-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 static short PHYS_SAVE_RESTORE_VERSION = 5;
 
@@ -42,7 +43,8 @@ struct PhysBlockHeader_t
 };
 BEGIN_SIMPLE_DATADESC( PhysBlockHeader_t )
 	DEFINE_FIELD( nSaved,	FIELD_INTEGER ),
-	DEFINE_FIELD( pWorldObject, FIELD_CLASSPTR ),
+	// NOTE: We want to save the actual address here for remapping, so use an integer
+	DEFINE_FIELD( pWorldObject, FIELD_PTR),
 END_DATADESC()
 
 #if defined(_STATIC_LINKED) && defined(CLIENT_DLL)
