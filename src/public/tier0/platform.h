@@ -683,6 +683,10 @@ typedef void * HINSTANCE;
 #pragma warning(disable : 4996)	// functions declared deprecated
 #endif
 
+#if PLATFORM_64BITS
+#pragma warning(disable : 4267)
+#endif
+
 
 #endif // _WIN32
 
