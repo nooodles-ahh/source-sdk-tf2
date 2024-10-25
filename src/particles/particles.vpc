@@ -20,12 +20,22 @@ $Configuration
 
 $Project "Particles"
 {
-	
-	$File	"particles.cpp" \
-			"particlecollection.cpp"
-
-
-	$Folder	"Link Libraries"
+	$Folder "Source Files"
 	{
- 	}
+		$File	"particles.cpp" \
+				"particlecollection.cpp" \
+				"psheet.cpp" \
+				"constraint_worldcollide.cpp"\
+				"render_points.cpp" \
+				"render_sprites.cpp"
+	}
+
+	$Folder "Header Files"
+	{
+		$File	"builtin_constraints.h" \
+				"builtin_emitters.h" \
+				"builtin_forces.h" \
+				"builtin_renderops.h" \
+				"psheet.h"
+	}
 }

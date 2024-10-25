@@ -4,10 +4,12 @@ CParticleSystemMgr* g_pParticleSystemMgr = nullptr;
 
 CParticleSystemMgr::CParticleSystemMgr()
 {
+
 }
 
 CParticleSystemMgr::~CParticleSystemMgr()
 {
+
 }
 
 bool CParticleSystemMgr::Init(IParticleSystemQuery* pQuery)
@@ -21,10 +23,14 @@ void CParticleSystemMgr::AddBuiltinSimulationOperators(void)
 }
 
 void CParticleSystemMgr::AddBuiltinRenderingOperators(void)
-{}
+{
+
+}
 
 void CParticleSystemMgr::AddParticleOperator(ParticleFunctionType_t nOpType, IParticleOperatorDefinition* pOpFactory)
-{}
+{
+
+}
 
 bool CParticleSystemMgr::ReadParticleConfigFile(const char* pFileName, bool bPrecache, bool bDecommitTempMemory)
 {
@@ -95,7 +101,9 @@ const DmxElementUnpackStructure_t* CParticleSystemMgr::GetParticleSystemDefiniti
 }
 
 void CParticleSystemMgr::ShouldLoadSheets(bool bLoadSheets)
-{}
+{
+
+}
 
 CSheet* CParticleSystemMgr::FindOrLoadSheet(char const* pszFname, ITexture* pTexture)
 {
@@ -108,16 +116,24 @@ CSheet* CParticleSystemMgr::FindOrLoadSheet(IMaterial* pMaterial)
 }
 
 void CParticleSystemMgr::FlushAllSheets(void)
-{}
+{
+
+}
 
 void CParticleSystemMgr::ResetRenderCache(void)
-{}
+{
+
+}
 
 void CParticleSystemMgr::AddToRenderCache(CParticleCollection* pParticles)
-{}
+{
+
+}
 
 void CParticleSystemMgr::DrawRenderCache(bool bShadowDepth)
-{}
+{
+
+}
 
 const char* GetParticleFieldName(int nParticleField)
 {
@@ -135,19 +151,29 @@ CParticleSystemDefinition* FindParticleSystem(const DmObjectId_t& id)
 }
 
 void CParticleSystemMgr::CommitProfileInformation(bool bCommit)
-{}
+{
+
+}
 
 void CParticleSystemMgr::DumpProfileInformation(void)
-{}
+{
+
+}
 
 void CParticleSystemMgr::PrecacheParticleSystem(const char* pName)
-{}
+{
+
+}
 
 void CParticleSystemMgr::UncacheAllParticleSystems()
-{}
+{
+
+}
 
 void CParticleSystemMgr::SetLastSimulationTime(float flTime)
-{}
+{
+
+}
 
 float CParticleSystemMgr::GetLastSimulationTime() const
 {
@@ -175,7 +201,9 @@ bool CParticleSystemMgr::ParticleThrottleRandomEnable() const
 }
 
 void CParticleSystemMgr::TallyParticlesRendered(int nVertexCount, int nIndexCount)
-{}
+{
+
+}
 
 bool CParticleSystemMgr::ReadParticleDefinitions(CUtlBuffer& buf, const char* pFileName, bool bPrecache, bool bDecommitTempMemory)
 {
@@ -183,7 +211,9 @@ bool CParticleSystemMgr::ReadParticleDefinitions(CUtlBuffer& buf, const char* pF
 }
 
 void CParticleSystemMgr::AddParticleSystem(CDmxElement* pParticleSystem)
-{}
+{
+
+}
 
 CDmxElement* CParticleSystemMgr::CreateParticleDmxElement(const DmObjectId_t& id)
 {
@@ -201,10 +231,16 @@ bool CParticleSystemMgr::WriteParticleConfigFile(CDmxElement* pParticleSystem, C
 }
 
 void CParticleSystemMgr::BuildBatchList(int iRenderCache, IMatRenderContext* pRenderContext, CUtlVector< Batch_t >& batches)
-{}
+{
+
+}
 
 void CParticleSystemMgr::AttachKillList(CParticleCollection* pParticles)
-{}
+{
+
+}
 
 void CParticleSystemMgr::DetachKillList(CParticleCollection* pParticles)
-{}
+{
+
+}
