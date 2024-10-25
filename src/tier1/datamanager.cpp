@@ -320,7 +320,7 @@ void CDataManagerBase::TouchByIndex( unsigned short memoryIndex )
 
 memhandle_t CDataManagerBase::ToHandle( unsigned short index )
 {
-	unsigned int hiword = m_memoryLists.Element(index).serial;
+	uintp hiword = m_memoryLists.Element(index).serial;
 	hiword <<= 16;
 	index++;
 	return (memhandle_t)( hiword|index );

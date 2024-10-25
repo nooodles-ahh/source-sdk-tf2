@@ -70,3 +70,5 @@ voice_ban.dt
 [Rr]elease*/
 *.pdb
 .vs/
+
+*.lib
