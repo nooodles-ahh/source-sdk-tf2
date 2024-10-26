@@ -1,19 +1,61 @@
 #include "particles.h"
+#include "tier3/tier3.h"
+#include "materialsystem/imaterialsystem.h"
+#include "materialsystem/imaterialsystemhardwareconfig.h"
+#include "particlesystemdict.h"
+#include "tier1/KeyValues.h"
 
 CParticleSystemMgr* g_pParticleSystemMgr = nullptr;
 
 CParticleSystemMgr::CParticleSystemMgr()
 {
-
+	m_pQuery = nullptr; // s_DefaultParticleSystemQuery
+	m_bDidInit = false;
+	m_bUsingDefaultQuery = true;
+	m_bShouldLoadSheets = true;
+	m_pParticleSystemDictionary = nullptr;
+	m_flLastSimulationTime = 0.0;
+	m_nParticleIndexCount = 0;
+	m_nParticleVertexCount = 0;
+	m_bFrameWarningNeeded = false;
+	m_nNumFramesMeasured = 0;
+	V_memset(m_nParticleVertexCountHistory, 0, ARRAYSIZE(m_nParticleVertexCountHistory));
+	m_fParticleCountScaling = 1.0;
 }
 
 CParticleSystemMgr::~CParticleSystemMgr()
 {
-
 }
 
 bool CParticleSystemMgr::Init(IParticleSystemQuery* pQuery)
 {
+	if (!g_pMaterialSystem->QueryInterface(MATERIAL_SYSTEM_INTERFACE_VERSION))
+	{
+		Warning("CParticleSystemMgr compiled using an old IMaterialSystem\n");
+		return false;
+	}
+
+	if ((m_bUsingDefaultQuery != false) && (pQuery != nullptr)) {
+		m_pQuery = (IParticleSystemQuery*)pQuery;
+		m_bUsingDefaultQuery = false;
+	}
+	if (!m_bDidInit) {
+
+		m_pParticleSystemDictionary = new CParticleSystemDictionary();
+		// TODO
+		//AddParticleOperator(FUNCTION_CHILDREN, (IParticleOperatorDefinition*)&_s_ChildOperatorDefinition);
+		m_pShadowDepthMaterial = nullptr;
+
+		if (g_pMaterialSystemHardwareConfig->GetDXSupportLevel() >= 90) {
+			KeyValues* pKVMaterial = new KeyValues("DepthWrite");
+			pKVMaterial->SetInt("$no_fullbright", 1);
+			pKVMaterial->SetInt("$model", 0);
+			pKVMaterial->SetInt("$alphatest", 0);
+			m_pShadowDepthMaterial = g_pMaterialSystem->CreateMaterial("__particlesDepthWrite", pKVMaterial);
+		}
+		SeedRandSIMD(12345678);
+		m_bDidInit = true;
+	}
 	return true;
 }
 

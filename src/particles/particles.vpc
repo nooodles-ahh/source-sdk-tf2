@@ -22,17 +22,27 @@ $Project "Particles"
 {
 	$Folder "Source Files"
 	{
-		$File	"particles.cpp" \
-				"particlecollection.cpp" \
-				"psheet.cpp" \
-				"constraint_worldcollide.cpp"\
-				"render_points.cpp" \
-				"render_sprites.cpp"
+		$Folder "Particles"
+		{
+			$File	"particles.cpp" \
+					"particlesystemdict.cpp" \
+					"particlecollection.cpp"
+		}
+	
+		$File	"addbuiltin_ops.cpp" \
+				"builtin_constraints.cpp" \
+				"builtin_initializers.cpp" \
+				"builtin_particle_emitters.cpp" \
+				"builtin_particle_forces.cpp" \
+				"builtin_particle_ops.cpp" \
+				"builtin_particle_render_ops.cpp" \
+				"particle_sort.cpp" \
+				"psheet.cpp"
 	}
 
 	$Folder "Header Files"
 	{
-		$File	"builtin_constraints.h" \
+		$File	"particlesystemdict.h" \
 				"builtin_emitters.h" \
 				"builtin_forces.h" \
 				"builtin_renderops.h" \
